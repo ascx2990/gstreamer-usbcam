@@ -1,0 +1,9 @@
+
+
+To run the test app:
+  $ python3 deepstream_test_1_usb.py <v4l2-device-path>
+Example:
+  $ python3 deepstream_test_1_usb.py /dev/video0
+
+
+
