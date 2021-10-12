@@ -6,8 +6,6 @@ sys.path.append('../')
 import gi
 gi.require_version('Gst', '1.0')
 from gi.repository import GObject, Gst
-from common.is_aarch_64 import is_aarch64
-from common.bus_call import bus_call
 
 def bus_call(bus, message, loop):
     t = message.type
@@ -56,11 +54,6 @@ def main(args):
     if not vidconvsrc:
         sys.stderr.write(" Unable to create videoconvert \n")
 
-    
-
-    # Finally render the osd output
-    if is_aarch64():
-        transform = Gst.ElementFactory.make("nvegltransform", "nvegl-transform")
 
     print("Creating EGLSink \n")
     sink = Gst.ElementFactory.make("xvimagesink", "nvvideo-renderer")
