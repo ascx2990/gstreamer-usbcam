@@ -1,9 +1,17 @@
 
-
-To run the test app:
-  $ python3 deepstream_test_1_usb.py <v4l2-device-path>
-Example:
-  $ python3 deepstream_test_1_usb.py /dev/video0
-
+This project is a simple way to show how to use GStreamer and OpenCV to open the camera.
+There are 3 example below:
+gstreamer:
+```sh
+  $ python3 run_gst_usb.py /dev/video0
+```
+opencv + gstreamer:
+```sh
+  $ python3 run_opencv_gst_usb.py
+  ```
+opencv only:
+```sh
+  $ python3 run_opencv_usb.py 
+```
 
 
