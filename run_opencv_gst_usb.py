@@ -2,7 +2,7 @@
 import sys
 import argparse
 import subprocess
-
+from FPS import GETFPS
 import cv2
 
 
@@ -10,7 +10,7 @@ WINDOW_NAME = 'CameraDemo'
 image_width=640
 image_height=480
 
-
+fps_streams={}
 
 
 def open_cam_usb(dev, width, height):
@@ -38,15 +38,16 @@ def read_cam(cap):
         _, img = cap.read() 
         
         cv2.imshow(WINDOW_NAME, img)
-        key = cv2.waitKey(10)
+        key = cv2.waitKey(1)
+        fps_streams[0].get_fps()
         if key == 27: # ESC key: quit program
             break
 
 
 def main():
    
-    print('OpenCV version: {}'.format(cv2.__version__))
-
+    #print('OpenCV version: {}'.format(cv2.__version__))
+    fps_streams[0]=GETFPS(0)
    
     cap = open_cam_usb("0",
                        image_width,
