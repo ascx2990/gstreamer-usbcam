@@ -8,6 +8,8 @@ from gi.repository import GObject, Gst
 from FPS import GETFPS
 import numpy as np
 import cv2
+import time
+
 fps_streams={}
 
 def bus_call(bus, message, loop):
@@ -36,9 +38,10 @@ def imageCallback(sink):
     
     image = np.ndarray((caps.get_value('height'),caps.get_value('width'),3), 
               buffer=buf.extract_dup(0,buf.get_size()),dtype=np.uint8)
-    rgb = image[...,::-1].copy()          
-    # cv2.imwrite('my_array.jpg',rgb)
+    rgb = image[...,::-1].copy()         
+    cv2.imwrite('my_array.jpg',rgb)
     fps_streams[0].get_fps()
+    #time.sleep(0.5)
     return Gst.FlowReturn.OK
 			
    
@@ -113,8 +116,8 @@ def main(args):
     caps_v4l2src.set_property('caps', Gst.Caps.from_string("video/x-raw, framerate=30/1, width=640, height=480"))
     rgb_caps.set_property('caps', Gst.Caps.from_string("video/x-raw,format=RGB,framerate=30/1, width=640, height=480"))
     source.set_property('device', args[1])
-   
-    sink.set_property('sync', False)#synchronize( 0:as soon as better ,1:synchronize )。
+    #rgb_sink.set_property('sync', 0)
+    #sink.set_property('sync', 0)#synchronize( 0:as soon as better ,1:synchronize )。
 
     print("Adding elements to Pipeline \n")
     pipeline.add(source)
@@ -147,6 +150,7 @@ def main(args):
     loop = GObject.MainLoop()
     bus = pipeline.get_bus()
     bus.add_signal_watch()
+    #Gst.debug_bin_to_dot_file(pipeline, Gst.DebugGraphDetails.ALL, 'gst_pipline')
     bus.connect ("message", bus_call, loop)
 
     # # Lets add probe to get informed of the meta data generated, we add probe to
