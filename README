@@ -14,4 +14,20 @@ opencv only:
   $ python3 run_opencv_usb.py 
 ```
 
+數據僅參考用，可能會依據不同的硬體（相機,平台,機器）而有所不同。
+
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;＼&nbsp;Platform<br/>Code ＼| X86(Intel I5) | ARM(Nvidia Nx) |
+| ------------- | ------------- | -------------- |
+| gst           | 30 fps        | 15 fps         |
+| opencv+gst    | 30 fps        | 15 fps         |
+| opencv        | 30 fps        | 15 fps         |
+
+
+下圖為在不同平台的cpu的用率，可用＄top 觀察CPU使用率 。
+run_gst_usb.py建議把imageCallback的分支拿掉，也就是tee後的queue1，這樣才會與另外兩隻範例的功能相同（只顯示畫面）。
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;＼&nbsp;Platform<br/>Code ＼| X86(Intel I5) | ARM(Nvidia Nx) |
+| ------------- | -------------| -------------- |
+| gst           | 2%-3%        | 15%         |
+| opencv+gst    | 2%-5%        | 18%         |
+| opencv        | 3%-10%       | 18%         |
 
