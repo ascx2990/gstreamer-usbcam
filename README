@@ -14,6 +14,7 @@ opencv only:
   $ python3 run_opencv_usb.py 
 ```
 
+## Performance
 數據僅參考用，可能會依據不同的硬體（相機,平台,機器）而有所不同。
 
 |    ＼Platform | X86(Intel I5) | ARM(Nvidia Nx) |
